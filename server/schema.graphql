@@ -2,9 +2,15 @@ type Query {
   jobs: [Job!]
 }
 
+# This single-line comment is not meant to be seen by clients!
 type Job {
   id: ID!
   title: String!
+  # Below there is a documentation comment, which is meant to be seen by clients. It could have spanned multiple lines.
+  # Notice that you should write it above the field you want to document. Additionally, you can also use Markdown syntax within it.
+  """
+  The **date** the job was published, in ISO-8601 format. E.g. `2022-12-31`
+  """
   date: String!
   description: String
 }
