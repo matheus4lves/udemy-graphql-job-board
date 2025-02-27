@@ -1,3 +1,4 @@
+import { getCompany } from "./db/companies.js";
 import { getJobs } from "./db/jobs.js";
 
 const toIsoDate = date => date.slice(0, "yyyy-mm-dd".length);
@@ -29,5 +30,6 @@ export const resolvers = {
     job objects contain a `createdAt` property. Again, this is because resolvers take precedence over
     properties with the same name of the requested field. */
     // createdAt: () => "2025-02-26",
+    company: job => getCompany(job.companyId),
   },
 };

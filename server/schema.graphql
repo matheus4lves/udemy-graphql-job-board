@@ -2,6 +2,12 @@ type Query {
   jobs: [Job!]
 }
 
+type Company {
+  id: ID!
+  name: String!
+  description: String
+}
+
 # This single-line comment is not meant to be seen by clients!
 type Job {
   id: ID!
@@ -13,4 +19,6 @@ type Job {
   """
   date: String!
   description: String
+  # This is how we can express an object association in GraphQL. Each Job belongs to a Company.
+  company: Company!
 }
