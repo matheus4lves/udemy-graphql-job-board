@@ -1,10 +1,11 @@
 import { getCompany } from "./db/companies.js";
-import { getJobs } from "./db/jobs.js";
+import { getJob, getJobs } from "./db/jobs.js";
 
 const toIsoDate = date => date.slice(0, "yyyy-mm-dd".length);
 
 export const resolvers = {
   Query: {
+    job: (_root, { id }) => getJob(id),
     jobs: getJobs, // Feasible because getJobs is already a function that returns a value (or a Promise)
     // jobs: () => getJobs(),
   },
