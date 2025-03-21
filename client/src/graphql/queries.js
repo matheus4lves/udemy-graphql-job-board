@@ -1,21 +1,43 @@
 import { gql, request } from "graphql-request";
 
-const query = gql`
-  {
-    jobs {
-      id
-      title
-      date
-      company {
-        name
+const url = "http://localhost:9000/graphql";
+
+export async function getJob(jobId) {
+  const document = gql`
+    query JobByID($id: ID!) {
+      job(id: $id) {
+        id
+        date
+        title
+        description
+        company {
+          id
+          name
+        }
       }
     }
-  }
-`;
+  `;
 
-async function getJobs() {
-  const { jobs } = await request("http://localhost:9000/graphql", query);
-  return jobs;
+  const variables = { id: jobId };
+
+  const { job } = await request({ url, document, variables });
+  return job;
 }
 
-export default getJobs;
+export async function getJobs() {
+  const document = gql`
+    query Jobs {
+      jobs {
+        id
+        title
+        date
+        company {
+          name
+        }
+      }
+    }
+  `;
+
+  const { jobs } = await request({ url, document });
+  return jobs;
+}
