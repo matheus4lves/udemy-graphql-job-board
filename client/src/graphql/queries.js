@@ -2,6 +2,22 @@ import { gql, request } from "graphql-request";
 
 const url = "http://localhost:9000/graphql";
 
+export async function getCompany(companyId) {
+  const document = gql`
+    query CompanyByID($id: ID!) {
+      company(id: $id) {
+        name
+        description
+      }
+    }
+  `;
+
+  const variables = { id: companyId };
+
+  const { company } = await request({ url, document, variables });
+  return company;
+}
+
 export async function getJob(jobId) {
   const document = gql`
     query JobByID($id: ID!) {
