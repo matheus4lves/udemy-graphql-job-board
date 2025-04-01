@@ -5,6 +5,7 @@ const toIsoDate = date => date.slice(0, "yyyy-mm-dd".length);
 
 export const resolvers = {
   Query: {
+    company: (_root, { id }) => getCompany(id),
     job: (_root, { id }) => getJob(id),
     jobs: getJobs, // Feasible because getJobs is already a function that returns a value (or a Promise)
     // jobs: () => getJobs(),
