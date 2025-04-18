@@ -1,5 +1,5 @@
 import { getCompany } from "./db/companies.js";
-import { getJob, getJobs } from "./db/jobs.js";
+import { getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
 
 const toIsoDate = date => date.slice(0, "yyyy-mm-dd".length);
 
@@ -9,6 +9,10 @@ export const resolvers = {
     job: (_root, { id }) => getJob(id),
     jobs: getJobs, // Feasible because getJobs is already a function that returns a value (or a Promise)
     // jobs: () => getJobs(),
+  },
+
+  Company: {
+    jobs: company => getJobsByCompany(company.id),
   },
 
   /* When the GraphQL server receives a request, it looks for field resolvers to provide the requested
