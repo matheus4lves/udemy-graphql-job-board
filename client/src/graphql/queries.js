@@ -8,6 +8,10 @@ export async function getCompany(companyId) {
       company(id: $id) {
         name
         description
+        jobs {
+          date
+          title
+        }
       }
     }
   `;
