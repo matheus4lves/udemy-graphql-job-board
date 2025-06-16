@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql";
 import { getCompany } from "./db/companies.js";
-import { getJob, getJobs, getJobsByCompany } from "./db/jobs.js";
+import { getJob, getJobs, getJobsByCompany, createJob } from "./db/jobs.js";
 
 const toIsoDate = date => date.slice(0, "yyyy-mm-dd".length);
 
@@ -31,6 +31,13 @@ export const resolvers = {
     },
     jobs: getJobs, // Feasible because getJobs is already a function that returns a value (or a Promise)
     // jobs: () => getJobs(),
+  },
+
+  Mutation: {
+    createJob: (_root, { title, description }) => {
+      const companyId = "FjcJCHJALA4i"; // To-do: set based on user.
+      return createJob({ companyId, title, description });
+    },
   },
 
   Company: {
