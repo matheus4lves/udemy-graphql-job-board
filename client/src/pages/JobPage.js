@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { formatDate } from "../lib/formatters";
 import { getJob } from "../graphql/queries";
-import { useEffect, useState } from "react";
 
 function JobPage() {
   const { jobId } = useParams();
