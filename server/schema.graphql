@@ -5,7 +5,7 @@ type Query {
 }
 
 type Mutation {
-  createJob(title: String!, description: String): Job
+  createJob(job: JobInput!): Job
 }
 
 type Company {
@@ -28,4 +28,10 @@ type Job {
   description: String
   # This is how we can express an object association in GraphQL. Each Job belongs to a Company.
   company: Company!
+}
+
+# Input types can only be used as arguments
+input JobInput {
+  title: String!
+  description: String
 }
