@@ -61,3 +61,18 @@ export async function getJobs() {
   const { jobs } = await request({ url, document });
   return jobs;
 }
+
+export async function createJob({ title, description }) {
+  const document = gql`
+    mutation CreateJob($job: JobInput!) {
+      job: createJob(job: $job) {
+        id
+      }
+    }
+  `;
+
+  const variables = { job: { title, description } };
+
+  const { job } = await request({ url, document, variables });
+  return job;
+}
